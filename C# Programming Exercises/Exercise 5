@@ -1,0 +1,49 @@
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        DisplayWelcome();
+
+        string userName = PromptUserName();
+
+        int userNumber = PromptUserNumber();
+
+        int square = SquareNumber(userNumber);
+
+        DisplayResult(userName, square);
+    }
+
+    // Display a welcome message
+    static void DisplayWelcome()
+    {
+        Console.WriteLine("Welcome to the Program!");
+    }
+
+    // Ask for the user's name
+    static string PromptUserName()
+    {
+        Console.Write("Please enter your name: ");
+        return Console.ReadLine();
+    }
+
+    // Ask for the user's favorite number
+    static int PromptUserNumber()
+    {
+        Console.Write("Please enter your favorite number: ");
+        return int.Parse(Console.ReadLine());
+    }
+
+    // Return the square of the number
+    static int SquareNumber(int number)
+    {
+        return number * number;
+    }
+
+    // Display the final message
+    static void DisplayResult(string name, int square)
+    {
+        Console.WriteLine($"{name}, the square of your number is {square}.");
+    }
+}
