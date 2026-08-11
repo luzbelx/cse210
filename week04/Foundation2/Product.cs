@@ -1,3 +1,4 @@
+```csharp
 public class Product
 {
     private string _name;
@@ -20,7 +21,7 @@ public class Product
 
     public string GetPackingLabel()
     {
-        return $"{_name} ({_productId})";
+        return $"Product: {_name} | ID: {_productId} | Quantity: {_quantity}";
     }
 }
-
+```
