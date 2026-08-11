@@ -1,3 +1,4 @@
+```csharp
 public class Address
 {
     private string _street;
@@ -13,16 +14,16 @@ public class Address
         _country = country;
     }
 
-    public bool IsUSA()
+    public bool IsInUSA()
     {
-        return _country.ToLower() == "usa";
+        return _country.ToLower() == "usa" ||
+               _country.ToLower() == "united states" ||
+               _country.ToLower() == "united states of america";
     }
 
-    public string GetAddress()
+    public string GetFullAddress()
     {
         return $"{_street}\n{_city}, {_state}\n{_country}";
     }
 }
-
-
-
+```
