@@ -1,13 +1,15 @@
+```csharp
 using System.Collections.Generic;
 
 public class Order
 {
-    private List<Product> _products = new List<Product>();
+    private List<Product> _products;
     private Customer _customer;
 
     public Order(Customer customer)
     {
         _customer = customer;
+        _products = new List<Product>();
     }
 
     public void AddProduct(Product product)
@@ -24,14 +26,21 @@ public class Order
             total += product.GetTotalCost();
         }
 
-        total += _customer.LivesInUSA() ? 5 : 35;
+        if (_customer.GetAddress().IsInUSA())
+        {
+            total += 5;
+        }
+        else
+        {
+            total += 35;
+        }
 
         return total;
     }
 
     public string GetPackingLabel()
     {
-        string label = "";
+        string label = "PACKING LABEL\n";
 
         foreach (Product product in _products)
         {
@@ -43,6 +52,9 @@ public class Order
 
     public string GetShippingLabel()
     {
-        return $"{_customer.GetName()}\n{_customer.GetAddress()}";
+        return $"SHIPPING LABEL\n" +
+               $"{_customer.GetName()}\n" +
+               $"{_customer.GetAddress().GetFullAddress()}";
     }
 }
+```
