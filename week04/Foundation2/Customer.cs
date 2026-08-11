@@ -1,3 +1,4 @@
+```csharp
 public class Customer
 {
     private string _name;
@@ -9,18 +10,14 @@ public class Customer
         _address = address;
     }
 
-    public bool LivesInUSA()
-    {
-        return _address.IsUSA();
-    }
-
     public string GetName()
     {
         return _name;
     }
 
-    public string GetAddress()
+    public Address GetAddress()
     {
-        return _address.GetAddress();
+        return _address;
     }
 }
+```
