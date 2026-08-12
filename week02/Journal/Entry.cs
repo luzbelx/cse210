@@ -2,6 +2,7 @@ using System;
 
 public class Entry
 {
+    // Member variables use _underscoreCamelCase as required.
     private string _date;
     private string _prompt;
     private string _response;
@@ -36,8 +37,24 @@ public class Entry
         Console.WriteLine();
     }
 
-    public string SaveFormat()
+    public string ToFileString()
     {
         return $"{_date}|{_prompt}|{_response}";
+    }
+
+    public static Entry FromFileString(string line)
+    {
+        string[] parts = line.Split('|');
+
+        if (parts.Length >= 3)
+        {
+            string date = parts[0];
+            string prompt = parts[1];
+            string response = string.Join("|", parts, 2, parts.Length - 2);
+
+            return new Entry(date, prompt, response);
+        }
+
+        return null;
     }
 }
