@@ -1,146 +1,112 @@
 using System;
-using System.Collections.Generic;
-
 
 class Program
 {
     static void Main(string[] args)
     {
-
         Journal journal = new Journal();
 
-
-        List<string> prompts = new List<string>()
+        string[] prompts =
         {
-            "What was the best part of your day?",
-            "What did you learn today?",
-            "What made you happy today?",
-            "What challenge did you overcome?",
-            "Who helped you today?"
+            "What was the best part of my day?",
+            "Who was the most interesting person I interacted with today?",
+            "What was something I learned today?",
+            "What is something I am grateful for today?",
+            "What was the strongest emotion I felt today?",
+            "What is one thing I could improve tomorrow?",
+            "What was something that made me smile today?"
         };
 
+        Random random = new Random();
 
         bool running = true;
 
+        // Creativity / Exceeding Requirements:
+        // In addition to the required journal functionality, this program
+        // includes two extra features. The user can view journal statistics,
+        // including total entries, total words, and average words per entry.
+        // The user can also search the journal for a specific word or phrase.
+        // These features make the journal more useful for tracking writing
+        // habits and finding previous thoughts.
 
         while (running)
         {
-
-            Console.WriteLine();
-            Console.WriteLine("Welcome to the Journal Program!");
-            Console.WriteLine();
-
-            Console.WriteLine("Please select one:");
+            Console.WriteLine("\n==============================");
+            Console.WriteLine("       JOURNAL PROGRAM");
+            Console.WriteLine("==============================");
             Console.WriteLine("1. Write a new entry");
             Console.WriteLine("2. Display journal");
             Console.WriteLine("3. Save journal");
             Console.WriteLine("4. Load journal");
-            Console.WriteLine("5. Quit");
-
-            Console.Write("Choose an option: ");
+            Console.WriteLine("5. View statistics");
+            Console.WriteLine("6. Search journal");
+            Console.WriteLine("7. Quit");
+            Console.Write("Select an option: ");
 
             string choice = Console.ReadLine();
 
-
-            switch(choice)
+            switch (choice)
             {
-
                 case "1":
+                    string prompt = prompts[random.Next(prompts.Length)];
 
-                    Random random = new Random();
+                    Console.WriteLine("\nPrompt:");
+                    Console.WriteLine(prompt);
+                    Console.Write("\nYour response: ");
 
-                    int index = random.Next(prompts.Count);
-
-
-                    string selectedPrompt = prompts[index];
-
-
-                    Console.WriteLine();
-                    Console.WriteLine(selectedPrompt);
-
-
-                    Console.Write("> ");
                     string response = Console.ReadLine();
-
 
                     string date = DateTime.Now.ToShortDateString();
 
-
                     Entry newEntry = new Entry(
                         date,
-                        selectedPrompt,
+                        prompt,
                         response
                     );
 
-
                     journal.AddEntry(newEntry);
 
-
-                    Console.WriteLine("Entry added!");
-
+                    Console.WriteLine("\nYour entry has been saved in the journal.");
                     break;
-
-
 
                 case "2":
-
-                    journal.DisplayEntries();
-
+                    journal.DisplayAll();
                     break;
-
-
 
                 case "3":
+                    Console.Write("\nEnter the filename to save to: ");
+                    string saveFilename = Console.ReadLine();
 
-                    Console.Write("Enter filename: ");
-
-                    string saveFile = Console.ReadLine();
-
-
-                    journal.SaveToFile(saveFile);
-
+                    journal.SaveToFile(saveFilename);
                     break;
-
-
 
                 case "4":
+                    Console.Write("\nEnter the filename to load from: ");
+                    string loadFilename = Console.ReadLine();
 
-                    Console.Write("Enter filename: ");
-
-                    string loadFile = Console.ReadLine();
-
-
-                    journal.LoadFromFile(loadFile);
-
+                    journal.LoadFromFile(loadFilename);
                     break;
-
-
 
                 case "5":
-
-                    running = false;
-
-                    Console.WriteLine("Goodbye!");
-
+                    journal.DisplayStatistics();
                     break;
 
+                case "6":
+                    Console.Write("\nEnter a word or phrase to search for: ");
+                    string searchTerm = Console.ReadLine();
 
+                    journal.SearchEntries(searchTerm);
+                    break;
+
+                case "7":
+                    running = false;
+                    Console.WriteLine("\nThank you for using the Journal Program!");
+                    break;
 
                 default:
-
-                    Console.WriteLine("Invalid option.");
-
+                    Console.WriteLine("\nInvalid option. Please choose a number from 1 to 7.");
                     break;
             }
-
         }
-
     }
 }
-
-
-// Extra Feature:
-// This program uses random prompts and allows users
-// to save and load their journal entries.
-
-#luzbelx
